@@ -1,6 +1,290 @@
 /******* Change Box Model ***************/
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+:root {
+  --primary-900: #0e2a47;
+  --primary-700: #22233f;
+  --accent-500: #00b7e6;
+  --accent-700: #005f87;
+  --surface-000: #ececec;
+  --text-900: #142233;
+  --text-100: #ffffff;
+  --muted-700: #334a60;
+  --border-300: #bad2e3;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text-900);
+  background-color: #edf4f9;
+  line-height: 1.4;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+#wrapper {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  background: var(--surface-000);
+}
+
+/* Header */
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.siteName a {
+  color: var(--primary-900);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+#tools a {
+  color: var(--primary-900);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+/* Navigation */
+nav {
+  background: var(--primary-700);
+}
+
+.nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.nav-list a {
+  display: block;
+  color: var(--text-100);
+  text-decoration: none;
+  text-align: center;
+  padding: 0.7rem 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+  background: #303256;
+}
+
+main {
+  padding: 1rem;
+}
+
+/* Home */
+.home h1 {
+  margin: 0 0 1rem;
+  font-size: 1.95rem;
+  color: var(--text-900);
+}
+
+.hero {
+  position: relative;
+  margin-bottom: 1.2rem;
+  min-height: 220px;
+}
+
+.hero-image {
+  width: 95%;
+  margin-left: auto;
+}
+
+.hero-card {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.2rem;
+  color: var(--accent-700);
+  font-weight: 700;
+  max-width: 190px;
+}
+
+.hero-card h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.75rem;
+}
+
+.hero-card ul {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-card li {
+  margin-bottom: 0.15rem;
+  font-size: 1.35rem;
+  line-height: 1.12;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 145px;
+  height: 44px;
+  margin-top: 0.3rem;
+  background: var(--accent-500);
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.home-panels {
+  display: grid;
+  gap: 1rem;
+}
+
+.reviews h2,
+.upgrades h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.72rem;
+  color: var(--text-900);
+}
+
+.reviews ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.reviews li {
+  margin-bottom: 0.62rem;
+  font-size: 1rem;
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.upgrade-item {
+  text-align: center;
+  color: #083f62;
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.upgrade-item:focus {
+  outline: 2px solid var(--primary-700);
+  outline-offset: 2px;
+}
+
+.upgrade-image-wrap {
+  display: grid;
+  place-items: center;
+  padding: 0.5rem;
+  margin-bottom: 0.35rem;
+  min-height: 86px;
+  border: 1px solid var(--border-300);
+  background: #00b7e6;
+}
+
+footer {
+  padding: 0.8rem 1rem 1rem;
+}
+
+.copyright {
+  margin: 0;
+  color: var(--muted-700);
+}
+
+@media screen and (min-width: 760px) {
+  body {
+    background-image: url("/images/site/checkerboard.jpg");
+    background-size: 320px;
+  }
+
+  #wrapper {
+    margin: 1.2rem auto;
+    border: 4px solid var(--accent-500);
+    border-radius: 8px;
+    box-shadow: 0 10px 26px rgba(14, 42, 71, 0.12);
+  }
+
+  main {
+    padding: 1.2rem 1.4rem;
+  }
+
+  .home h1 {
+    font-size: 2.1rem;
+  }
+
+  .hero {
+    min-height: 340px;
+  }
+
+  .hero-image {
+    width: 73%;
+    margin: 0 auto;
+  }
+
+  .hero-card {
+    top: 1.2rem;
+    left: 1.65rem;
+    max-width: 235px;
+  }
+
+  .hero-card h2 {
+    font-size: 2.05rem;
+  }
+
+  .hero-card li {
+    font-size: 1.45rem;
+  }
+
+  .hero-cta {
+    width: 165px;
+    height: 54px;
+    font-size: 1.2rem;
+  }
+
+  .home-panels {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .upgrades {
+    order: 1;
+  }
+
+  .reviews {
+    order: 2;
+  }
+
+  .reviews h2,
+  .upgrades h2 {
+    font-size: 2rem;
+  }
+
+  .upgrade-image-wrap {
+    min-height: 120px;
+  }
+
+  .reviews li {
+    font-size: 1.14rem;
+  }
 }
