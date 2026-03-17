@@ -239,8 +239,8 @@ WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 
 UPDATE public.inventory
 SET 
-inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
-inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
+inv_image = REPLACE(inv_image, '/images/vehicles/', '/images' ),
+inv_thumbnail = REPLACE(inv_thumbnail, '/images/vehicles/', '/images');
 
 -- Create relationship between 'classification' and 'inventory' tables
 ALTER TABLE IF EXISTS public.inventory
