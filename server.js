@@ -50,19 +50,27 @@ app.use(async (req, res, next) => {
 * Express Error Handler
 * Place after all other middleware
 *************************/
+// 404 handler
+app.use((req, res, next) => {
+  const err = new Error("Page Not Found")
+  err.status = 404
+  next(err)
+})
+// Error handling middleware
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
+
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
 
   let message
   if (err.status == 404) {
     message = err.message
   } else {
-    message = 'Oh no! There was a crash. Maybe try a different route?'
+    message = "Oh no! There was a crash. Maybe try a different route?"
   }
 
-  res.render("errors/error", {
-    title: err.status || 'Server Error',
+  res.status(err.status || 500).render("errors/error", {
+    title: err.status || "Server Error",
     message,
     nav
   })

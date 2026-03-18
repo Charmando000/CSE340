@@ -295,6 +295,11 @@ footer {
   #inv-display {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .vehicle-detail {
+    flex-direction: column;
+  }
+  
 }
 
 #inv-display {
@@ -356,4 +361,18 @@ footer {
   font-size: 1.2rem;
   color: var(--primary-700);
   margin: 2rem 0;
+}
+
+.vehicle-detail {
+  display: flex;
+  gap: 20px;
+}
+
+.vehicle-detail img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.vehicle-info {
+  flex: 1;
 }
