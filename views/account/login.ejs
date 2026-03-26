@@ -8,11 +8,19 @@
 
     <body>
 
+        <% if (errors && errors.array) { %>
+            <ul>
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
         <h1><%= title %></h1>
 
         <!-- Mensajes flash -->
         <%- messages() %>
-        <form action="/account/login" method="post">
+        <form id="loginForm" action="/account/login" method="post">
     
             <label for="email">Email:</label>
             <input 

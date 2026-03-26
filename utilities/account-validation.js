@@ -1,6 +1,7 @@
 const utilities = require(".")
   const { body, validationResult } = require("express-validator")
   const validate = {}
+  const accountModel = require("../models/account-model")
 
 /*  **********************************
   *  Registration Data Validation Rules
@@ -25,12 +26,16 @@ const utilities = require(".")
   
       // valid email is required and cannot already exist in the DB
       body("account_email")
-      .trim()
-      .escape()
-      .notEmpty()
-      .isEmail()
-      .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required."),
+        .trim()
+        .isEmail()
+        .normalizeEmail() // refer to validator.js docs
+        .withMessage("A valid email is required.")
+        .custom(async (account_email) => {
+        const emailExists = await accountModel.checkExistingEmail(account_email)
+            if (emailExists){
+            throw new Error("Email exists. Please log in or use different email")
+        }
+        }),
   
       // password is required and must be strong password
       body("account_password")
@@ -46,6 +51,24 @@ const utilities = require(".")
         .withMessage("Password does not meet requirements."),
     ]
   }
+
+  validate.loginRules = () => {
+    return [
+      // valid email is required and cannot already exist in the DB
+      body("account_email")
+        .trim()
+        .isEmail()
+        .normalizeEmail() // refer to validator.js docs
+        .withMessage("A valid email is required."),
+  
+      // password is required and must be strong password
+      body("account_password")
+        .trim()
+        .notEmpty()
+        .withMessage("Password does not meet requirements."),
+    ]
+  }
+
  /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
@@ -64,6 +87,20 @@ validate.checkRegData = async (req, res, next) => {
       account_email,
     })
     return
+  }
+  next()
+}
+
+validate.checklogData = async (req, res, next) => {
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    let nav = await require("../utilities/").getNav()
+    return res.render("account/login", {
+      title: "Login",
+      nav,
+      errors
+    })
   }
   next()
 }
