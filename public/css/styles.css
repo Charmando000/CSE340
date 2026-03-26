@@ -376,3 +376,50 @@ footer {
 .vehicle-info {
   flex: 1;
 }
+
+#messages li{
+  color: red;
+  font: bold;
+  text-align: left;
+
+}
+
+form {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, button {
+  padding: 10px;
+}
+
+.password-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+}
+
+.password-container button {
+  padding: 8px;
+  cursor: pointer;
+}
+
+input:required:invalid, input:focus:invalid {
+ background-image: url(/images/invalid.png);
+ background-position: right top;
+ background-repeat: no-repeat;
+}
+
+input:required:valid {
+ background-image: url(/images/valid.png);
+ background-position: right top;
+ background-repeat: no-repeat;
+}
+
