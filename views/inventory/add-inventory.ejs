@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <body>
+
+       <% if (typeof errors !== "undefined" && errors) { %>
+            <ul>
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <h1><%= title %></h1>
+
+        <!-- Mensajes flash -->
+        <%- messages() %>
+        <form id="add-inventory-form" action="/inv/add-inventory" method="post">
+            
+            <label>classification</label>
+            
+            <%- classificationList %>
+
+            <label for="inv_make">Make</label>
+            <input id="inv_make" name="inv_make" type="text" required
+            value="<%= locals.inv_make %>">
+
+            <label for="inv_model">Model</label>
+            <input id="inv_model" name="inv_model" type="text" required
+            value="<%= locals.inv_model %>">
+
+            <label for="inv_year">Year</label>
+            <input type="number" id="inv_year" name="inv_year" required
+            value="<%= locals.inv_year %>">
+
+            <label for="inv_description">Description</label>
+            <textarea id="inv_description" name="inv_description" required><%= locals.inv_description %></textarea>
+
+            <label for="inv_price">Price</label>
+            <input id="inv_price" name="inv_price" type="number" step="0.01" required
+            value="<%= locals.inv_price %>">
+
+            <label for="inv_miles">Miles</label>
+            <input id="inv_miles" name="inv_miles" type="number" required
+            value="<%= locals.inv_miles %>">
+
+            <label for="inv_color">Color</label>
+            <input id="inv_color" name="inv_color" type="text" required
+            value="<%= locals.inv_color %>">
+
+            <label for="inv_image">Image URL</label>
+            <input id="inv_image" name="inv_image" type="text" required
+            value="<%= locals.inv_image %>">
+
+            <label for="inv_thumbnail">Thumbnail URL</label>
+            <input id="inv_thumbnail" name="inv_thumbnail" type="text" required
+            value="<%= locals.inv_thumbnail %>">
+
+            <button type="submit">Add Inventory</button>
+
+        </form>
+            
+    </body>
+</html>

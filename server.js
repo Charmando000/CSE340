@@ -16,7 +16,6 @@ const env = require("dotenv").config()
 const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
 
-
 const app = express()
 const static = require("./routes/static")
 
@@ -59,6 +58,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", utilities.handleErrors(inventoryRoute))
 app.use(express.static("public"))
 app.use("/account", accountRoute)
+app.use("/inv", require("./routes/inventoryRoute"))
 
 //Index Route
 app.get("/", function(req, res) {

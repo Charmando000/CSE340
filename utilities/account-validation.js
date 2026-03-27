@@ -105,4 +105,43 @@ validate.checklogData = async (req, res, next) => {
   next()
 }
 
+validate.inventoryRules = () => {
+  return [
+    body("inv_make")
+    .trim()
+    .notEmpty()
+    .withMessage("Make is required"),
+    body("inv_model")
+    .trim()
+    .notEmpty()
+    .withMessage("Model is required"),
+    body("inv_year")
+    .isInt()
+    .withMessage("Year must be a valid integer"),
+    body("inv_price")
+    .isFloat({ gt: 0 })
+    .withMessage("Price must be a valid number"),
+    body("inv_miles")
+    .isInt({ gt: 0 })
+    .withMessage("Miles must be a valid integer"),
+    body("inv_color")
+    .trim()
+    .notEmpty()
+    .withMessage("Color is required"),
+    body("classification_id")
+    .isInt()
+    .withMessage("Classification ID must be a valid integer")
+  ]
+}
+
+validate.classificationRules = () => {
+  return [
+    body("classification_name")
+    .trim()
+    .matches(/^[A-Za-z0-9]+$/)
+    .withMessage("No spaces or special characters allowed.")
+
+  ]
+}
+
 module.exports = validate
