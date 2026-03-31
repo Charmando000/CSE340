@@ -25,6 +25,17 @@
             <li><a href="/inv/add-inventory">Add Inventory</a></li>
             <li><a href="/inv/add-classification">Add Classification</a></li>
         </ul>
+
+        <h2>Management Inventory</h2>
+        <p>Select a classifications to see inventory items</p>
+
+        <%- classificationList %>
+        
+        <table id="inventoryDisplay"></table>
+
+        <noscript>Java must be enable to use this page</noscript>
+
+        <script src="../../js/inventory.js"></script>
             
     </body>
 </html>

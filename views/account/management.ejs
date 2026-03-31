@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+    <body>
+
+        <h1>Account Management</h1>
+
+        <!-- Mensaje flash -->
+        <% if (notice) { %>
+            <p><%= notice %></p>
+        <% } %>
+
+        <!-- Errores -->
+        <% if (errors) { %>
+            <ul>
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <p>You're logged in</p>
+
+    </body>
+</html>
