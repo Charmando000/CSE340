@@ -1,32 +1,34 @@
 'use strict'
 
-const { response } = require("express")
-const { buildByInventoryId } = require("../../controllers/invController")
-
 // Get a list of items in inventory based on the classification_id 
 let classificationList = document.querySelector("#classificationList")
-classificationList.addEventListener("change", function() {
+
+if (classificationList) {
+    classificationList.addEventListener("change", function() {
     let classification_id = classificationList.value
     console.log(`classification_id is: ${classification_id}`)
-    let classUrl = "/inv/getInventory/"+classification_id
-    fetch(classIdURL)
-    .then(function(rensponse){
-        if(response.ok){
-            return response.json();
-        }
-        throw Error("Network response was not OK")
+    let classUrl = "/inv/getInventory/" + classification_id
+    fetch(classUrl)
+        .then(function(response) {
+            if (response.ok) {
+                return response.json()
+            }
+            throw Error("Network response was not OK")
     })
-    .then(function(data){
-        console.log(data);
-        buildInventoryList(data);
+    .then(function(data) {
+        console.log(data)
+        buildInventoryList(data)
     })
-    .catch(function(error){
-        console.log('There was a problem: ', error.message)
+    .catch(function(error) {
+        console.error('There was a problem: ', error.message)
     })
 })
+}
+
 // Build inventory items into HTML table components and inject into DOM 
 function buildInventoryList(data){
     let inventoryDisplay = document.getElementById("inventoryDisplay");
+    if (!inventoryDisplay) return
     // Set up the table labels 
     let dataTable = '<thead>';
     dataTable += '<tr><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>';

@@ -105,6 +105,95 @@ validate.checklogData = async (req, res, next) => {
   next()
 }
 
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a first name."),
+    body("account_lastname")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 2 })
+      .withMessage("Please provide a last name."),
+    body("account_email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("A valid email is required.")
+      .custom(async (account_email, { req }) => {
+        const existingAccount = await accountModel.getAccountByEmail(account_email)
+        if (existingAccount && existingAccount.account_id != req.body.account_id) {
+          throw new Error("Email exists. Please log in or use a different email.")
+        }
+      }),
+    body("account_id")
+      .trim()
+      .notEmpty()
+      .isInt()
+      .withMessage("Account ID is required."),
+  ]
+}
+
+validate.updatePasswordRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .notEmpty()
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+      .withMessage("Password does not meet requirements."),
+    body("account_id")
+      .trim()
+      .notEmpty()
+      .isInt()
+      .withMessage("Account ID is required."),
+  ]
+}
+
+validate.checkUpdateAccountData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    const accountData = await accountModel.getAccountById(req.body.account_id)
+    return res.render("account/update-view", {
+      errors,
+      title: "Update Account",
+      nav,
+      accountData,
+      account_firstname: req.body.account_firstname,
+      account_lastname: req.body.account_lastname,
+      account_email: req.body.account_email,
+      account_id: req.body.account_id,
+    })
+  }
+  next()
+}
+
+validate.checkPasswordData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    const accountData = await accountModel.getAccountById(req.body.account_id)
+    return res.render("account/update-view", {
+      errors,
+      title: "Update Account",
+      nav,
+      accountData,
+      account_id: req.body.account_id,
+    })
+  }
+  next()
+}
+
 validate.inventoryRules = () => {
   return [
     body("inv_make")

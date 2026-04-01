@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <body>
+
+       <% if (typeof errors !== "undefined" && errors) { %>
+            <ul>
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <h1><%= title %></h1>
+
+        <!-- Mensajes flash -->
+        <%- messages() %>
+        <h1><%= title %></h1>
+
+        <p>Confirm Deletion - This action cannot be undone.</p>
+
+        <form action="/inv/delete" method="post">
+
+            <label>Make</label>
+            <input type="text" value="<%= inv_make %>" readonly>
+
+            <label>Model</label>
+            <input type="text" value="<%= inv_model %>" readonly>
+
+            <label>Year</label>
+            <input type="text" value="<%= inv_year %>" readonly>
+
+            <label>Price</label>
+            <input type="text" value="<%= inv_price %>" readonly>
+
+            <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+            <button type="submit">Delete</button>
+
+        </form>
+    </body>
+</html>
