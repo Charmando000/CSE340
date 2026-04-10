@@ -62,6 +62,7 @@ app.use("/inv", utilities.handleErrors(inventoryRoute))
 app.use(express.static("public"))
 app.use("/account", accountRoute)
 app.use("/inv", require("./routes/inventoryRoute"))
+app.use("/favorites", require("./routes/favoritesRoute"));
 
 //Index Route
 app.get("/", function(req, res) {

@@ -1,5 +1,12 @@
 <h1><%= title %></h1>
 
+<p><a href="/favorites">My Favorites</a></p>
+
 <div>
   <%- detailHTML %>
 </div>
+
+<form action="/favorites/add" method="POST">
+  <input type="hidden" name="item_id" value="<%= inv_id %>">
+  <button type="submit">⭐ Add to Favorites</button>
+</form>
